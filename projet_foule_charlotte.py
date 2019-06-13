@@ -1,8 +1,9 @@
 #-*- coding: utf-8 -*-
+from random import randint
 
 class Voyageur:
     def __init__(self,x_entree,y_entree,x_sortie,y_sortie,identifiant):
-        '''coordonnées d'entrée (chercher dans la liste des accès) et coordonnées de sortie du voyageur'''
+        '''coordonnées d'entrée (chercher dans la liste des accès) et coordonnées de sortie du voyageur en terme de case'''
         self.identifiant=identifiant
         self.x_courant=x_entree 
         self.y_courant=y_entree
@@ -13,22 +14,22 @@ class Voyageur:
         self.est_arrive=False '''statut du voyageur : arrivé ou non'''
         
     def meilleure_direction(self):
-        '''Calcul de la meilleure direction (en terme de case) à prendre'''
-        if self.x_courant>self.x_sortie:
+        '''Calcul de la meilleure direction (en terme de case) à prendre, renvoie un couple -1, 0 ou 1 selon la direction à prendre'''
+        if self.x_courant>self.x_sortie: '''si on a dépassé la sortie horizontalement'''
             x_deplacement=-1
-        elif self.x_courant<self.x_sortie:
+        elif self.x_courant<self.x_sortie: '''si on n'a pas dépassé la sortie horizontalement'''
             x_deplacement=1
-        else:
+        else: '''si on est au niveau de la sortie horizontalement'''
             x_deplacement=0
-        if self.y_courant>self.y_sortie:
+        if self.y_courant>self.y_sortie: '''si on a dépassé la sortie verticalement'''
             y_deplacement=-1
-        elif self.y_courant<self.y_sortie:
+        elif self.y_courant<self.y_sortie: '''si on n'a pas dépassé la sortie verticalement'''
             y_deplacement=1
-        else:
+        else:  '''si on est au niveau de la sortie verticalement'''
             y_deplacement=0
-        return (x_deplacement,y_deplacement) #on peut utiliser ce résultat pr savoir si le voyageur est arrivé
+        return x_deplacement,y_deplacement #on peut utiliser ce résultat pr savoir si le voyageur est arrivé
 
-    def change_coordonnees_voyageur(self,(nv_x,nv_y)):
+    def change_coordonnees_voyageur(self,nv_x,nv_y):
         '''deplace le voyageur dans la meilleure_case_libre'''
         self.x_courant=nv_x
         self.y_courant=nv_y
@@ -41,8 +42,8 @@ class Case:
     '''classe créant les cases et gérant leur représentation graphique'''
     def __init__(self,etat,x,y):
         self.etat=etat '''etat : libre=0, obstacle fixe=1, accès=2, voyageur=3'''
-        self.x=x '''abscisse de la case'''
-        self.y=y '''ordonnée de la case'''
+        self.x=int(x) '''abscisse de la case'''
+        self.y=int(y) '''ordonnée de la case'''
 
     def modifier_etat(self,nv_etat):
         '''modifie l'état de la case'''
