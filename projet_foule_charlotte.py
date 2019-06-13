@@ -5,27 +5,27 @@ class Voyageur:
     def __init__(self,x_entree,y_entree,x_sortie,y_sortie,identifiant):
         '''coordonnées d'entrée (chercher dans la liste des accès) et coordonnées de sortie du voyageur en terme de case'''
         self.identifiant=identifiant
+        #position courante du voyageur
         self.x_courant=x_entree 
         self.y_courant=y_entree
-        '''position courante du voyageur'''
+        #position de la sortie
         self.x_sortie=x_sortie
         self.y_sortie=y_sortie
-        '''position de la sortie'''
-        self.est_arrive=False '''statut du voyageur : arrivé ou non'''
+        self.est_arrive=False #statut du voyageur : arrivé ou non
         
     def meilleure_direction(self):
         '''Calcul de la meilleure direction (en terme de case) à prendre, renvoie un couple -1, 0 ou 1 selon la direction à prendre'''
-        if self.x_courant>self.x_sortie: '''si on a dépassé la sortie horizontalement'''
+        if self.x_courant>self.x_sortie: #si on a dépassé la sortie horizontalement
             x_deplacement=-1
-        elif self.x_courant<self.x_sortie: '''si on n'a pas dépassé la sortie horizontalement'''
+        elif self.x_courant<self.x_sortie: #si on n'a pas dépassé la sortie horizontalement
             x_deplacement=1
-        else: '''si on est au niveau de la sortie horizontalement'''
+        else: #si on est au niveau de la sortie horizontalement
             x_deplacement=0
-        if self.y_courant>self.y_sortie: '''si on a dépassé la sortie verticalement'''
+        if self.y_courant>self.y_sortie: #si on a dépassé la sortie verticalement
             y_deplacement=-1
-        elif self.y_courant<self.y_sortie: '''si on n'a pas dépassé la sortie verticalement'''
+        elif self.y_courant<self.y_sortie: #si on n'a pas dépassé la sortie verticalement
             y_deplacement=1
-        else:  '''si on est au niveau de la sortie verticalement'''
+        else:  #si on est au niveau de la sortie verticalement
             y_deplacement=0
         return x_deplacement,y_deplacement #on peut utiliser ce résultat pr savoir si le voyageur est arrivé
 
@@ -41,9 +41,9 @@ class Voyageur:
 class Case:
     '''classe créant les cases et gérant leur représentation graphique'''
     def __init__(self,etat,x,y):
-        self.etat=etat '''etat : libre=0, obstacle fixe=1, accès=2, voyageur=3'''
-        self.x=int(x) '''abscisse de la case'''
-        self.y=int(y) '''ordonnée de la case'''
+        self.etat=etat #etat : libre=0, obstacle fixe=1, accès=2, voyageur=3
+        self.x=int(x) #abscisse de la case           attention dans la représentation graphique ça doit correspondre à un carré 
+        self.y=int(y) #ordonnée de la case           les coordonnées de la case indique les coordonnées du sommet en haut à gauche
 
     def modifier_etat(self,nv_etat):
         '''modifie l'état de la case'''
@@ -77,10 +77,10 @@ class Carte:
     
 
 def main():
-    x_dim=500 ; y_dim=300 '''initialisation des dimensions de la carte'''
+    x_dim=500 ; y_dim=300 #initialisation des dimensions de la carte
     nb_acces=4
     nb_voyageurs=nb_acces
-    c=Carte(x_dim, y_dim) '''nouvel objet carte'''
+    c=Carte(x_dim, y_dim) #nouvel objet carte
     c.dessin_carte()
     liste_voyageurs=[i for i in range(1,nb_voyageurs+1)]
 
