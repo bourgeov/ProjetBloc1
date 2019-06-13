@@ -58,12 +58,11 @@ class Carte:
 
     def dessin_carte(self):
         '''Créer la carte avec les instances Case'''
-        liste_cases=[]
+        mesCases = [[0 for i in range(x_dim)] for j in range(y_dim)]
         for i in range(x_dim):
             for j in range(y_dim):
-                liste_cases.append(randint(0,2))
-                c=Case()
-                c.etat=liste_cases[i+j]
+                mesCases[i][j] = Case(randint(0,2),i, j)
+  
 
     def meilleure_case_libre(self):
         ''''propose la meilleure case libre selon la meilleure_direction obtenue'''
